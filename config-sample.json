@@ -1,0 +1,10 @@
+{
+    "apiKey": "YouTubeApiKey",
+    "playlists": [
+      "PlaylistId1",
+      "PlaylistId2",
+      "..."
+    ],
+    "itemCount": 3,
+    "outputPath": "output.json"
+}
