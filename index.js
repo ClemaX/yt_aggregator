@@ -22,7 +22,7 @@ function getPlaylistItems(id, count) {
             part: 'snippet',
             maxResults: count,
             playlistId: id
-        }, function(err, response) {
+        }, (err, response) => {
             if (err) reject('The API returned an error: ' + err);
             resolve(response.data.items);
         });
@@ -34,8 +34,7 @@ function parsePlaylists(playlists) {
 
     playlists.forEach((playlist) => {
         playlist.forEach((item) => {
-            if (item.kind === "youtube#playlistItem")
-            {
+            if (item.kind === 'youtube#playlistItem') {
                 items.push({
                     name: item.snippet.title,
                     channel: item.snippet.channelTitle,
