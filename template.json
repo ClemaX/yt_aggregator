@@ -2,7 +2,7 @@
 	{
 		"name": "Video name",
 		"channel": "Channel name",
-		"duration": "Video duration",
+		"thumbnail": "Video thumbnail url",
 		"uploadTime": "Upload date & time"
 	}
 ]
