@@ -1,11 +1,36 @@
 const fs = require('fs');
 const {google} = require('googleapis');
+const pubSubHubbub = require('pubsubhubbub');
 
 const configPath = 'config.json'
 const config = JSON.parse(fs.readFileSync(configPath));
 
-if (!config.apiKey) throw (Error("No api key in " + configPath + '!'));
-if (!config.playlists) throw (Error('No playlists in ' + configPath + '!'))
+if (!config.apiKey) throw (Error('No api key in ' + configPath + '!'));
+if (!config.playlists) throw (Error('No playlists in ' + configPath + '!'));
+if (!config.pubSubOptions) throw (Error('No PubSub-config in ' + configPath + '!'));
+
+const pubsub = pubSubHubbub.createServer(config.pubSubOptions);
+const topics = config.playlists.map((id) => 'https://www.youtube.com/feeds/videos.xml?playlist_id=' + id);
+const hub = 'http://pubsubhubbub.appspot.com';
+
+pubsub.on("subscribe", (data) => console.log(data.topic + " subscribed"));
+
+pubsub.on('listen', () => {
+    console.log("PubSub listening on port %s with callback %s", pubsub.port, pubsub.callbackUrl);
+    topics.forEach((topic) => {
+        pubsub.subscribe(topic, hub, (err) => {
+            if(err) console.log('Failed subscribing');
+            else console.log('Subscribing to %s', topic);
+        });
+    });
+});
+
+pubsub.on("error", (error) => {
+    console.log("Error");
+    console.log(error);
+});
+
+pubsub.listen(config.pubSubOptions.port);
 
 const promises = config.playlists.map((id) => getPlaylistItems(id, config.itemCount));
 

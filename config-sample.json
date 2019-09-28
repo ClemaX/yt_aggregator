@@ -1,5 +1,9 @@
 {
     "apiKey": "YouTubeApiKey",
+    "pubSubOptions": {
+      "port": 1337,
+      "callbackUrl": "yourIp/somePath"
+    },
     "playlists": [
       "PlaylistId1",
       "PlaylistId2",
