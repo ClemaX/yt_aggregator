@@ -9,14 +9,26 @@ if (!config.apiKey) throw (Error('No api key in ' + configPath + '!'));
 if (!config.playlists) throw (Error('No playlists in ' + configPath + '!'));
 if (!config.pubSubOptions) throw (Error('No PubSub-config in ' + configPath + '!'));
 
+process.on('SIGINT', () => process.exit(2));
+process.on('uncaughtException', (e) => {
+    console.error('Uncaught Exception: ');
+    console.error(e.stack);
+    process.exit(99);
+});
+
 const pubsub = pubSubHubbub.createServer(config.pubSubOptions);
 const topics = config.playlists.map((id) => 'http://www.youtube.com/feeds/videos.xml?playlist_id=' + id);
 const hub = 'http://pubsubhubbub.appspot.com';
 
-pubsub.on("subscribe", (data) => console.log(data.topic + " subscribed"));
+pubsub.on("subscribe", (data) => {
+    console.log(data.topic + " subscribed");
+});
+
+pubsub.on("unsubscribe", (data) => {
+    console.log(data.topic + " unsubscribed");
+});
 
 pubsub.on('listen', () => {
-    console.log("PubSub listening on port %s with callback %s", pubsub.port, pubsub.callbackUrl);
     topics.forEach((topic) => {
         pubsub.subscribe(topic, hub, (err) => {
             if(err) console.log('Failed subscribing');
@@ -25,11 +37,13 @@ pubsub.on('listen', () => {
     });
 });
 
-pubsub.on("error", (error) => {
-    console.log("Error");
-    console.log(error);
+pubsub.on('error', (error) => {
+    console.error('PubSub Error: ');
+    console.error(error);
+    process.exit(99);
 });
 
+process.on('exit', () => topics.forEach((topic) => pubsub.unsubscribe(topic)));
 pubsub.listen(config.pubSubOptions.port);
 
 const promises = config.playlists.map((id) => getPlaylistItems(id, config.itemCount));
