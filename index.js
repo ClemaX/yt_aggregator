@@ -2,7 +2,7 @@ const fs = require('fs');
 const {google} = require('googleapis');
 const pubSubHubbub = require('pubsubhubbub');
 
-const configPath = 'config.json'
+const configPath = 'config.json';
 const config = JSON.parse(fs.readFileSync(configPath));
 
 if (!config.apiKey) throw (Error('No api key in ' + configPath + '!'));
