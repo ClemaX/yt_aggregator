@@ -1,0 +1,16 @@
+{
+  "name": "yt_aggregator",
+  "version": "1.0.0",
+  "description": "YouTube content aggregator generating JSON-data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ClemaX@bitbucket.org/ClemaX/yt_aggregator.git"
+  },
+  "author": "ClemaX",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/ClemaX/yt_aggregator#readme"
+}
