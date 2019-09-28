@@ -20,12 +20,12 @@ const pubsub = pubSubHubbub.createServer(config.pubSubOptions);
 const topics = config.playlists.map((id) => 'http://www.youtube.com/feeds/videos.xml?playlist_id=' + id);
 const hub = 'http://pubsubhubbub.appspot.com';
 
-pubsub.on("subscribe", (data) => {
-    console.log(data.topic + " subscribed");
+pubsub.on('subscribe', (data) => {
+    console.log(data.topic + ' subscribed');
 });
 
-pubsub.on("unsubscribe", (data) => {
-    console.log(data.topic + " unsubscribed");
+pubsub.on('unsubscribe', (data) => {
+    console.log(data.topic + ' unsubscribed');
 });
 
 pubsub.on('listen', () => {
