@@ -10,7 +10,7 @@ if (!config.playlists) throw (Error('No playlists in ' + configPath + '!'));
 if (!config.pubSubOptions) throw (Error('No PubSub-config in ' + configPath + '!'));
 
 const pubsub = pubSubHubbub.createServer(config.pubSubOptions);
-const topics = config.playlists.map((id) => 'https://www.youtube.com/feeds/videos.xml?playlist_id=' + id);
+const topics = config.playlists.map((id) => 'http://www.youtube.com/feeds/videos.xml?playlist_id=' + id);
 const hub = 'http://pubsubhubbub.appspot.com';
 
 pubsub.on("subscribe", (data) => console.log(data.topic + " subscribed"));
