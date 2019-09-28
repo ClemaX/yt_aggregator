@@ -15,7 +15,6 @@ function init(config) {
         topics.forEach((topic) => {
             pubsub.subscribe(topic, hub, (err) => {
                 if(err) console.log('Failed subscribing');
-                else console.log('Subscribing to %s', topic);
             });
         });
     });
