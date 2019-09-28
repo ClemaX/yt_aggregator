@@ -6,7 +6,7 @@ var topics = [];
 
 function init(config) {
     pubsub = pubSubHubbub.createServer(config.pubSubOptions);
-    topics = config.playlists.map((id) => 'http://www.youtube.com/feeds/videos.xml?playlist_id=' + id);
+    topics = config.playlists.map((id) => 'https://www.youtube.com/feeds/videos.xml?playlist_id=' + id);
 
     pubsub.on('subscribe', (data) => console.log(data.topic + ' subscribed'));
     pubsub.on('unsubscribe', (data) => console.log(data.topic + ' unsubscribed'));
