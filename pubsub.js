@@ -29,7 +29,9 @@ function init(config) {
 }
 
 function unsubscribe() {
-    topics.forEach((topic) => pubsub.unsubscribe(topic));
+    topics.forEach((topic) => {
+        pubsub.unsubscribe(topic, hub);
+    });
 }
 
 module.exports = {
