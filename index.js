@@ -39,7 +39,7 @@ function parsePlaylists(playlists) {
                 items.push({
                     name: item.snippet.title,
                     channel: item.snippet.channelTitle,
-                    thumbnail: item.snippet.thumbnails.standard.url,
+                    thumbnail: item.snippet.thumbnails.maxres.url,
                     uploadTime: item.snippet.publishedAt
                 });
             }
