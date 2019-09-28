@@ -12,5 +12,8 @@
   },
   "author": "ClemaX",
   "license": "UNLICENSED",
-  "homepage": "https://bitbucket.org/ClemaX/yt_aggregator#readme"
+  "homepage": "https://bitbucket.org/ClemaX/yt_aggregator#readme",
+  "dependencies": {
+    "googleapis": "^43.0.0"
+  }
 }
