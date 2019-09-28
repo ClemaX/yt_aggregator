@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fs = require('fs');
 const PubSub = require('./pubsub');
 const fetchPlaylists = require('./fetch-playlists');
