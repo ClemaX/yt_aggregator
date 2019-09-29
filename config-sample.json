@@ -2,7 +2,8 @@
     "apiKey": "YouTubeApiKey",
     "pubSubOptions": {
       "port": 1337,
-      "callbackUrl": "yourIp/somePath"
+      "callbackURL": "yourIp/somePath",
+      "secret": "TopSecret"
     },
     "playlists": [
       "PlaylistId1",

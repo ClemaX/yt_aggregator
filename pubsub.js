@@ -1,4 +1,4 @@
-const pubSubHubbub = require('pubsubhubbub');
+const pubSubHubbub = require('websub');
 
 const hub = 'http://pubsubhubbub.appspot.com';
 var pubsub = null;
@@ -30,7 +30,9 @@ function init(config) {
 
 function unsubscribe() {
     topics.forEach((topic) => {
-        pubsub.unsubscribe(topic, hub);
+        pubsub.unsubscribe(topic, hub, (err) => {
+            if (err) console.error('Error while unsubscribing from %s', topic);
+        });
     });
 }
 
