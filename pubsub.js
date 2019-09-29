@@ -11,7 +11,7 @@ function init(config) {
     pubsub.on('subscribe', (data) => console.log(data.topic + ' subscribed'));
     pubsub.on('unsubscribe', (data) => console.log(data.topic + ' unsubscribed'));
 
-    pubsub.on('listen', () => {
+    pubsub.on('listening', () => {
         topics.forEach((topic) => {
             pubsub.subscribe(topic, hub, (err) => {
                 if(err) console.log('Failed subscribing');
