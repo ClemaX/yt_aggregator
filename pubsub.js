@@ -13,9 +13,7 @@ function init(config) {
 
     pubsub.on('listening', () => {
         topics.forEach((topic) => {
-            pubsub.subscribe(topic, hub, (err) => {
-                if(err) console.log('Failed subscribing');
-            });
+            pubsub.subscribe(topic, hub);
         });
     });
 
