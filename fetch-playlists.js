@@ -10,6 +10,7 @@ function fetchPlaylists(config) {
     Promise.all(promises).then((playlists) => {
         uploads = parsePlaylists(playlists);
         uploads.sort((a, b) => Date.parse(b.uploadTime) - Date.parse(a.uploadTime));
+        console.log('Updated database');
         fs.writeFileSync(config.outputPath, JSON.stringify(uploads));
     }).catch((error) => {throw (Error(error));});
 }

@@ -25,6 +25,10 @@ function init(config) {
         process.exit(99);
     });
 
+    pubsub.on('denied', (data) => {
+        console.log('Access denied: %s', data);
+    });
+
     return pubsub;
 }
 
