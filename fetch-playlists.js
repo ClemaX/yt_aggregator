@@ -4,7 +4,7 @@ const {google} = require('googleapis');
 module.exports = fetchPlaylists;
 
 function fetchPlaylists(config) {
-    const promises = config.playlists.map((id) => getPlaylistItems(id, config.itemCount));
+    const promises = config.playlists.map((id) => getPlaylistItems(config.apiKey, id, config.itemCount));
     var uploads = [];
 
     Promise.all(promises).then((playlists) => {
@@ -38,7 +38,8 @@ function parsePlaylists(playlists) {
                     name: item.snippet.title,
                     channel: item.snippet.channelTitle,
                     thumbnail: item.snippet.thumbnails.maxres.url,
-                    uploadTime: item.snippet.publishedAt
+                    uploadTime: item.snippet.publishedAt,
+                    id: item.snippet.resourceId.videoId
                 });
             }
         });

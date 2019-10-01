@@ -26,3 +26,5 @@ pubsub.on('feed', (data) => {
     console.log(data.feed.toString());
     fetchPlaylists(config);
 });
+
+fetchPlaylists(config);
