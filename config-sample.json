@@ -10,6 +10,11 @@
       "PlaylistId2",
       "..."
     ],
+    "channelIds": [
+      "ChannelId1",
+      "ChannelId2",
+      "..."
+    ],
     "itemCount": 3,
     "outputPath": "output.json"
 }

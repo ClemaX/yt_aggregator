@@ -2,17 +2,17 @@ const pubSubHubbub = require('websub');
 
 const hub = 'http://pubsubhubbub.appspot.com';
 var pubsub = null;
-var topics = [];
+var channels = [];
 
 function init(config) {
     pubsub = pubSubHubbub.createServer(config.pubSubOptions);
-    topics = config.playlists.map((id) => 'https://www.youtube.com/feeds/videos.xml?playlist_id=' + id);
+    channels = config.channelIds.map((id) => 'https://www.youtube.com/xml/feeds/videos.xml?channel_id=' + id);
 
     pubsub.on('subscribe', (data) => console.log(data.topic + ' subscribed'));
     pubsub.on('unsubscribe', (data) => console.log(data.topic + ' unsubscribed'));
 
     pubsub.on('listening', () => {
-        topics.forEach((topic) => {
+        channels.forEach((topic) => {
             pubsub.subscribe(topic, hub);
         });
     });
@@ -31,7 +31,7 @@ function init(config) {
 }
 
 function unsubscribe() {
-    topics.forEach((topic) => {
+    channels.forEach((topic) => {
         pubsub.unsubscribe(topic, hub, (err) => {
             if (err) console.error('Error while unsubscribing from %s', topic);
         });
