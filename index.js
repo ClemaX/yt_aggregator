@@ -8,6 +8,7 @@ const config = JSON.parse(fs.readFileSync(configPath));
 
 if (!config.apiKey) throw (Error('No api key in ' + configPath + '!'));
 if (!config.playlists) throw (Error('No playlists in ' + configPath + '!'));
+if (!config.channelIds) throw (Error('No channels in ' + configPath + '!'));
 if (!config.pubSubOptions) throw (Error('No PubSub-config in ' + configPath + '!'));
 
 process.on('SIGINT', () => process.exit(2));
@@ -22,8 +23,7 @@ process.on('exit', PubSub.unsubscribe);
 pubsub.listen(config.pubSubOptions.port);
 
 pubsub.on('feed', (data) => {
-    console.log(data);
-    console.log(data.feed.toString());
+    console.log('Received data: %s', data.body);
     fetchPlaylists(config);
 });
 
