@@ -38,7 +38,7 @@ function parsePlaylists(playlists) {
                 items.push({
                     name: item.snippet.title,
                     channel: item.snippet.channelTitle,
-                    thumbnail: item.snippet.thumbnails.maxres.url,
+                    thumbnail: (item.snippet.thumbnails.maxres || item.snippet.thumbnails.high).url,
                     uploadTime: item.snippet.publishedAt,
                     id: item.snippet.resourceId.videoId
                 });
