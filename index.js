@@ -12,7 +12,8 @@ if (!config.playlists) throw (Error('No playlists in ' + configPath + '!'));
 if (!config.channelIds) throw (Error('No channels in ' + configPath + '!'));
 if (!config.pubSubOptions) throw (Error('No PubSub-config in ' + configPath + '!'));
 
-process.on('SIGINT', () => process.exit(2));
+process.on('SIGINT', () => process.exit(0));
+process.on('SIGQUIT', () => process.exit(1));
 process.on('uncaughtException', (e) => {
     console.error(e.stack);
     process.exit(99);
@@ -20,7 +21,7 @@ process.on('uncaughtException', (e) => {
 
 const pubsub = PubSub.init(config);
 
-process.on('exit', PubSub.unsubscribe);
+process.on('beforeExit', PubSub.unsubscribe);
 pubsub.listen(config.pubSubOptions.port);
 
 pubsub.on('feed', (data) => {
