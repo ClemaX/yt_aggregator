@@ -30,12 +30,12 @@ function init(config) {
     return pubsub;
 }
 
-function unsubscribe() {
-    channels.forEach((topic) => {
+async function unsubscribe() {
+    await Promise.all(channels.map((topic) => {
         pubsub.unsubscribe(topic, hub, (err) => {
             if (err) console.error('Error while unsubscribing from %s', topic);
         });
-    });
+    }));
 }
 
 module.exports = {

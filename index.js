@@ -20,7 +20,10 @@ process.on('uncaughtException', (e) => {
 
 const pubsub = PubSub.init(config);
 
-process.on('beforeExit', PubSub.unsubscribe);
+process.on('beforeExit', async () => {
+    await PubSub.unsubscribe();
+    process.exit(0);
+});
 pubsub.listen(config.pubSubOptions.port);
 
 pubsub.on('feed', (data) => {
