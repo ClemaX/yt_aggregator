@@ -1,0 +1,14 @@
+[Unit]
+Description=%I content-aggregator
+
+[Service]
+PIDFile=/var/run/%i.pid
+User=%i
+Group=%i
+Restart=always
+KillSignal=SIGINT
+WorkingDirectory=/home/%i/yt_aggregator
+ExecStart=/home/%i/yt_aggregator/index.js
+
+[Install]
+WantedBy=multi-user.target
